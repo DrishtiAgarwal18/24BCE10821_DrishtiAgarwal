@@ -1,0 +1,137 @@
+﻿create database workers;
+
+use workers;
+
+CREATE TABLE Worker (
+WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+FIRST_NAME CHAR(25),
+LAST_NAME CHAR(25),
+SALARY INT(15),
+JOINING_DATE DATETIME,
+DEPARTMENT CHAR(25)
+);
+
+select * from worker;
+INSERT INTO Worker
+(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+update worker set salary = salary+5000;
+
+delete from worker where worker_id = 8;
+
+update worker set first_name = 'ananya', last_name = 'sharma' where worker_id = 1;
+
+#implementing rollback, savepoint tcl commands.
+
+create table emp(
+id int
+);
+
+--
+start transaction;
+
+insert into emp values(101);
+
+savepoint time15;
+
+insert into emp values(102);
+
+savepoint time16;
+
+select * from emp;
+
+rollback to time15;
+
+select * from emp;
+
+commit;
+
+select first_name,department from worker where worker_id = 1;
+
+select first_name, salary, department from worker where salary > 100000;
+
+select first_name, salary, department from worker where salary < 100000 and department = 'admin';
+
+select first_name, salary, department from worker where salary < 100000 or department = 'admin';
+
+select first_name, department,salary from worker where department = 'admin' or salary >= 100000;
+
+#19May2026
+
+select worker_id, first_name, department,salary from worker where worker_id = 1 or worker_id = 7;
+
+select worker_id, first_name, department,salary from worker where worker_id = 1 in (1,6,7);
+
+select * from worker where salary between 100000 and 3000000;
+
+select * from worker where salary between 100000 and 3000000 AND department in ('hr');
+
+select * from worker where salary between 100000 and 3000000 AND department not in ('hr','admin');
+
+#like, not like
+
+select * from worker where first_name like 'A%';
+select * from worker where first_name like '__i%';
+
+select * from worker where first_name like '_i__a%';
+select * from worker;
+
+select * from worker where last_name like 'S%';
+
+select * from worker where last_name like '__n%';
+
+select * from worker where last_name like 's%' or last_name like '__a%';
+
+select * from worker where last_name not like 's%';
+
+#aggregate functions
+
+select min(salary) from worker;
+select max(salary) from worker;
+
+select min(salary) from worker where department = 'hr';
+
+select count(worker_id) from worker where department = 'hr';
+
+select sum(salary) from worker where department = 'hr';
+
+select avg(salary) from worker where department = 'hr';
+
+select min(salary)from worker where department = 'admin';
+
+select min(salary) from worker where department = 'admin' and first_name not like '%a%';
+
+select salary from worker
+union
+select salary from worker;
+
+#alias = temp name
+
+select worker_id as roll_no from worker;
+
+select distinct(department) from worker;
+
+SELECT worker_id,
+first_name,
+CASE
+WHEN salary > 300000 THEN 'Rich people'
+		 WHEN salary >= 100000 and salary <299999 THEN 'Middle'
+		 ELSE 'Poor'
+	   END AS Status
+FROM worker;
+
+select min(salary) from worker where department = 'admin';
+select max(salary) from worker where department = 'admin';
+
+create view minSalaryAdmin as select min(salary) from worker where department = 'admin';
+create view maxSalaryAdmin as select max(salary) from worker where department = 'admin';
+
+select  * from maxsalaryadmin;
