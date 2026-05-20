@@ -1,0 +1,70 @@
+﻿use newdb_fp;
+
+create table employee(
+id int primary key ,
+firstname varchar(50) not null,
+lastname varchar(50) not null,
+age int not null, check (age>=18)
+);
+
+desc employee;
+
+insert into employee values (103,'vanya','sharma',55);
+select * from employee;
+
+alter table employee add unique(id);
+
+alter table employee
+modify lastname varchar(50);
+
+drop table employee;
+
+#did not work because of age constraint
+insert into employee values (102,'v','han',5);
+
+create table products(
+mfgno int primary key,
+pname varchar(100) not null,
+batchno int not null unique
+);
+
+desc products;
+
+insert into products value (5612,'chair',69853);
+select * from products;
+
+#will show error since a primary key already exists, there cannot be more than one primary key
+alter table products add primary key(id);
+
+alter table products drop primary key;
+select * from products;
+desc products;
+
+drop table products;
+
+create table category(
+cid int primary key,
+cname varchar(100) not null
+);
+
+select * from category;
+
+insert into category values (101,'electronics');
+insert into category values (102,'home appliances');
+
+drop table products;
+
+create table products(
+pid int primary key,
+pname varchar(100) not null,
+cid int,
+foreign key (cid) references category(cid) on delete cascade
+);
+
+desc products;
+
+insert into products values (501,'Asus Charger',101);
+insert into products values (504,'Wooden Chair',102);
+
+select * from products;
+delete from category where cid = 101;
