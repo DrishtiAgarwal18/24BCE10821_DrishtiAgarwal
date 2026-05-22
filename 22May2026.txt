@@ -1,0 +1,45 @@
+﻿create database joinss;
+
+use joinss;
+
+create table departments(
+did int primary key,
+dname varchar(25) not null unique
+);
+
+insert into departments values
+(101,'cse'),
+(102,'ece'),
+(103,'civil'),
+(106,'aero'),
+(107,'mec');
+
+select * from departments
+order by did asc;
+
+create table hod(
+hid int primary key,
+hname varchar(25) not null unique
+);
+
+insert into hod values
+(101,'rahul'),
+(102,'rohan'),
+(103,'aditya'),
+(104,'arjun');
+
+select * from hod;
+
+select * from departments cross join hod order by did;
+
+select * from departments inner join hod
+where departments.did = hod.hid;
+
+select * from departments natural join hod;
+
+select * from departments left outer join hod
+on departments.did = hod.hid
+order by did asc;
+
+select * from departments right outer join hod
+on departments.did = hod.hid;
