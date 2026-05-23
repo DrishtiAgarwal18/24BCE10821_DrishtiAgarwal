@@ -1,0 +1,184 @@
+﻿create database test2;
+use test2;
+
+CREATE TABLE Departments (
+dept_id INT PRIMARY KEY,
+dept_name VARCHAR(50) NOT NULL,
+location_id VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Departments VALUES
+(10, 'Consulting', 'NYC'),
+(20, 'Engineering', 'SF'),
+(30, 'R&D', 'London'),
+(40, 'Sales', 'NYC'),
+(50, 'HR', 'SF'),
+(60, 'Admin', 'London');
+
+CREATE TABLE Employees (
+employee_id INT PRIMARY KEY,
+employee_name VARCHAR(50) NOT NULL,
+manager_id INT,
+dept_id INT,
+salary DECIMAL(10,2) NOT NULL,
+
+FOREIGN KEY (manager_id)
+REFERENCES Employees(employee_id),
+
+FOREIGN KEY (dept_id)
+REFERENCES Departments(dept_id)
+);
+
+INSERT INTO Employees VALUES
+(100,'Alice Smith',NULL,10,180000.00),
+(101,'Bob Johnson',100,20,120000.00),
+(102,'Charlie Brown',101,20,95000.00),
+(103,'Diana Prince',100,30,110000.00),
+(104,'Evan Clark',103,30,85000.00),
+(105,'Fiona Glen',101,20,90000.00),
+(106,'George King',100,40,75000.00),
+(107,'Hannah Lee',103,30,88000.00),
+(108,'Ivan Rossi',100,50,60000.00),
+(109,'Jane Doe',101,20,125000.00),
+(110,'Kevin Blue',104,30,86000.00);
+
+CREATE TABLE Projects (
+project_id INT PRIMARY KEY,
+project_name VARCHAR(50) NOT NULL,
+client_name VARCHAR(50) NOT NULL,
+start_date DATE NOT NULL,
+dept_id INT,
+
+FOREIGN KEY (dept_id)
+REFERENCES Departments(dept_id)
+);
+
+INSERT INTO Projects VALUES
+(5001,'Aurora Migration','GlobalTech Solutions','2023-01-15',20),
+(5002,'Synergy App Dev','Zenith Corp','2023-05-20',30),
+(5003,'Q4 Sales Strategy','Apex Industries','2024-01-01',40),
+(5004,'Global Expansion','GlobalTech Solutions','2024-03-10',10),
+(5005,'Internal HR Tool','Internal','2024-02-01',50),
+(5006,'Data Analytics','Zenith Corp','2022-11-01',20),
+(5007,'Future Tech R&D','R&D Dept','2024-06-01',30);
+
+CREATE TABLE Assignments (
+assignment_id INT PRIMARY KEY,
+employee_id INT,
+project_id INT,
+hours_worked INT NOT NULL,
+start_date DATE NOT NULL,
+
+FOREIGN KEY (employee_id)
+REFERENCES Employees(employee_id),
+
+FOREIGN KEY (project_id)
+REFERENCES Projects(project_id)
+);
+
+INSERT INTO Assignments VALUES
+(1,101,5001,150,'2023-01-15'),
+(2,102,5001,160,'2023-01-15'),
+(3,105,5001,140,'2023-02-01'),
+(4,103,5002,80,'2023-05-20'),
+(5,104,5002,70,'2023-06-01'),
+(6,106,5003,5,'2024-01-01'),
+(7,100,5004,20,'2024-03-10'),
+(8,107,5002,75,'2023-05-25'),
+(9,109,5006,200,'2022-11-01'),
+(10,101,5006,250,'2022-11-01'),
+(11,102,5006,180,'2022-12-01'),
+(12,110,5007,10,'2024-06-01');
+
+
+#1.
+Select e.employee_name,d.dept_name,d.location_id from employees e
+join departments d
+on e.dept_id = d.dept_id;
+
+#2.
+Select p.project_name,p.client_name,SUM(a.hours_worked) from projects p
+join assignments a
+on p.project_id = a.project_id
+join departments d
+on p.dept_id = d.dept_id
+where d.dept_name = 'Consulting'
+group by p.project_name, p.client_name;
+
+#4.
+select d.dept_name from departments d
+left join employees e
+on d.dept_id = e.dept_id
+where e.employee_id is null;
+
+#6
+select e.employee_name, avg(a.hours_worked) from employees e
+join assignments a
+on e.employee_id = a.employee_id
+group by e.employee_name;
+
+#8.
+select p.client_name,sum(a.hours_worked) from projects p
+join assignments a
+on p.project_id = a.project_id
+group by p.client_name
+having sum(a.hours_worked) > 500;
+
+#10.
+select p.project_name, count(distinct a.employee_id) from projects p
+join assignments a
+on p.project_id = a.project_id
+group by p.project_name
+having count(distinct a.employee_id) > 5;
+
+#12.
+select d.dept_name from departments d
+join employees e
+on d.dept_id = e.dept_id
+join assignments a
+on e.employee_id = a.employee_id
+group by d.dept_name
+having count(distinct a.project_id) > 1;
+
+#14
+select p.project_name from projects p
+left join assignments a
+on p.project_id = a.project_id
+where a.assignment_id is null;
+
+#15
+select employee_name from employees e1
+where salary > (
+select max(salary) from employees e2
+where e1.dept_id = e2.dept_id
+and e1.employee_id != e2.employee_id
+);
+
+#16
+select e.employee_name, min(a.start_date) from employees e
+join assignments a
+on e.employee_id = a.employee_id
+group by e.employee_name;
+
+#20
+select p.project_name,
+case
+when sum(a.hours_worked) > 300 then 'High Activity'
+else 'Normal'
+end as status
+from projects p
+left join assignments a
+on p.project_id = a.project_id
+group by p.project_name;
+
+#21
+select e.employee_name ,m.employee_name from employees e
+left join employees m
+on e.manager_id = m.employee_id;
+
+#23
+select distinct e.employee_name from employees e
+join assignments a
+on e.employee_id = a.employee_id
+where a.project_id in (select project_id from Assignments where employee_id = 101)
+and e.employee_id != 101;
