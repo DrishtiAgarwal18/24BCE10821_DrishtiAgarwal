@@ -1,0 +1,506 @@
+use vit 
+switched to db vit
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      avgQty : {
+        $avg : '$quantity'
+      }
+    }
+  }
+])
+{
+  _id: 'Lattes',
+  avgQty: 27.5
+}
+{
+  _id: 'Americanos',
+  avgQty: 17.5
+}
+{
+  _id: 'Cappuccino',
+  avgQty: 16.333333333333332
+}
+{
+  _id: 'Mochas',
+  avgQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      avgPrice : {$avg : '$price'}
+    }
+  }
+])
+{
+  _id: 'Mochas',
+  avgPrice: 25
+}
+{
+  _id: 'Cappuccino',
+  avgPrice: 7.666666666666667
+}
+{
+  _id: 'Americanos',
+  avgPrice: 8.25
+}
+{
+  _id: 'Lattes',
+  avgPrice: 20
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      avgAmount : {
+        $avg : {
+          $multiply : ['quantity','price']
+        }
+      }
+    }
+  }
+]).sort({
+  avgAmount : 1
+})
+MongoServerError[TypeMismatch]: Failed to optimize pipeline :: caused by :: $multiply only supports numeric types, not string
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      avgAmount : {
+        $avg : {
+          $multiply : ['$quantity','$price']
+        }
+      }
+    }
+  }
+]).sort({
+  avgAmount : 1
+})
+{
+  _id: 'Cappuccino',
+  avgAmount: 127.33333333333333
+}
+{
+  _id: 'Americanos',
+  avgAmount: 140
+}
+{
+  _id: 'Mochas',
+  avgAmount: 275
+}
+{
+  _id: 'Lattes',
+  avgAmount: 562.5
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      avgAmount : {
+        $avg : {
+          $multiply : ['$quantity','$price']
+        }
+      }
+    }
+  },{
+    $match : {
+      avgAmount : {
+        $gt : 150
+      }
+    }
+  }
+]).sort({
+  avgAmount : 1
+})
+{
+  _id: 'Mochas',
+  avgAmount: 275
+}
+{
+  _id: 'Lattes',
+  avgAmount: 562.5
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      itemCount : {
+        $count : {}
+      }
+    }
+  }
+])
+{
+  _id: 'Lattes',
+  itemCount: 2
+}
+{
+  _id: 'Americanos',
+  itemCount: 4
+}
+{
+  _id: 'Cappuccino',
+  itemCount: 3
+}
+{
+  _id: 'Mochas',
+  itemCount: 1
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      itemCount : {
+        $count : {}
+      }
+    } 
+  },{
+    $match : {
+      itemCount : {
+        $gt : 2
+      }
+    }
+  }
+])
+{
+  _id: 'Cappuccino',
+  itemCount: 3
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      totalQty : {
+        $sum : '$quantity'
+      }
+    }
+  }
+])
+{
+  _id: 'Mochas',
+  totalQty: 11
+}
+{
+  _id: 'Lattes',
+  totalQty: 55
+}
+{
+  _id: 'Americanos',
+  totalQty: 70
+}
+{
+  _id: 'Cappuccino',
+  totalQty: 49
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : null,
+      totalQty : {
+        $sum : '$quantity'
+      }
+    }
+  }
+])
+{
+  _id: null,
+  totalQty: 185
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : null,
+      totalQty : {
+        $sum : '$quantity'
+      }
+    }
+  },{
+    $project : {
+      _id : 0
+    }
+  }
+])
+{
+  totalQty: 185
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      totalQty : {$sum : '$quantity'}
+    }
+  }
+])
+{
+  _id: 'Cappuccino',
+  totalQty: 49
+}
+{
+  _id: 'Americanos',
+  totalQty: 70
+}
+{
+  _id: 'Lattes',
+  totalQty: 55
+}
+{
+  _id: 'Mochas',
+  totalQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      totalQty : {$sum : '$quantity'}
+    }
+  }
+]).sort({
+  totalQty : -1
+})
+{
+  _id: 'Americanos',
+  totalQty: 70
+}
+{
+  _id: 'Lattes',
+  totalQty: 55
+}
+{
+  _id: 'Cappuccino',
+  totalQty: 49
+}
+{
+  _id: 'Mochas',
+  totalQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      totalQty : {$sum : '$quantity'}
+    }
+  },{
+    $match : {
+      totalQty : {$gt : 50}
+    }
+  }
+]).sort({
+  totalQty : -1
+})
+{
+  _id: 'Americanos',
+  totalQty: 70
+}
+{
+  _id: 'Lattes',
+  totalQty: 55
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$size',
+      totalAmount : {$sum : {$multiply : ['quantity','price']}}
+    }
+  }
+]).sort({
+  totalAmount : -1
+})
+MongoServerError[TypeMismatch]: Failed to optimize pipeline :: caused by :: $multiply only supports numeric types, not string
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$size',
+      totalAmount : {$sum : {$multiply : ['$quantity','$price']}}
+    }
+  }
+]).sort({
+  totalAmount : -1
+})
+{
+  _id: 'Tall',
+  totalAmount: 1285
+}
+{
+  _id: 'Grande',
+  totalAmount: 875
+}
+{
+  _id: 'Short',
+  totalAmount: 182
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : null,
+      maxQty : {
+        $max : '$quantity'
+      }
+    }
+  },{
+    $project : {_id : 0}
+  }
+])
+{
+  maxQty: 30
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      maxQty : {
+        $max : '$quantity'
+      }
+    }
+  }
+])
+{
+  _id: 'Cappuccino',
+  maxQty: 20
+}
+{
+  _id: 'Americanos',
+  maxQty: 22
+}
+{
+  _id: 'Lattes',
+  maxQty: 30
+}
+{
+  _id: 'Mochas',
+  maxQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      maxQty : {
+        $max : {$multiply : ['$quantity','$price']}
+      }
+    }
+  }
+])
+{
+  _id: 'Mochas',
+  maxQty: 275
+}
+{
+  _id: 'Lattes',
+  maxQty: 750
+}
+{
+  _id: 'Americanos',
+  maxQty: 210
+}
+{
+  _id: 'Cappuccino',
+  maxQty: 170
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : null,
+      maxQty : {
+        $min : '$quantity'
+      }
+    }
+  }
+])
+{
+  _id: null,
+  maxQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : null,
+      maxQty : {
+        $min : '$quantity'
+      }
+    }
+  },{
+    $project : {
+      _id : 0
+    }
+  }
+])
+{
+  maxQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      minQty : {$min : '$quantity'}
+    }
+  }
+])
+{
+  _id: 'Cappuccino',
+  minQty: 12
+}
+{
+  _id: 'Americanos',
+  minQty: 12
+}
+{
+  _id: 'Lattes',
+  minQty: 25
+}
+{
+  _id: 'Mochas',
+  minQty: 11
+}
+db.sales.aggregate([
+  {
+    $group : {
+      _id : '$item',
+      minAmount : {$min : {$multiply : ['$quantity','$price']}}
+    }
+  }
+])
+{
+  _id: 'Lattes',
+  minAmount: 375
+}
+{
+  _id: 'Americanos',
+  minAmount: 110
+}
+{
+  _id: 'Cappuccino',
+  minAmount: 72
+}
+{
+  _id: 'Mochas',
+  minAmount: 275
+}
+
+db.sales.aggregate([
+  {
+    $group: {
+      _id: "$item",
+      totalSales: { $sum: { $multiply: ["$quantity", "$price"] } }
+    }
+  }
+])
+{
+  _id: 'Lattes',
+  totalSales: 1125
+}
+{
+  _id: 'Americanos',
+  totalSales: 560
+}
+{
+  _id: 'Cappuccino',
+  totalSales: 382
+}
+{
+  _id: 'Mochas',
+  totalSales: 275
+}
+
+
