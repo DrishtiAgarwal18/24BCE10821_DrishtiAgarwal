@@ -1,0 +1,542 @@
+use vit
+switched to db vit
+show collections
+products
+sales
+db.sales.find()
+{
+  _id: ObjectId('6a22dc3d387b2b08e7dde726'),
+  id: 101,
+  item: 'Coffee',
+  price: 10,
+  quantity: 20
+}
+db.sales.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+db.sales.drop()
+true
+db.sales.insertMany([
+	{ "_id" : 1, "item" : "Americanos", "price" : 5, "size": "Short", "quantity" : 22, "date" : ISODate("2022-01-15T08:00:00Z") },
+	{ "_id" : 2, "item" : "Cappuccino", "price" : 6, "size": "Short","quantity" : 12, "date" : ISODate("2022-01-16T09:00:00Z") },
+	{ "_id" : 3, "item" : "Lattes", "price" : 15, "size": "Grande","quantity" : 25, "date" : ISODate("2022-01-16T09:05:00Z") },
+	{ "_id" : 4, "item" : "Mochas", "price" : 25,"size": "Tall", "quantity" : 11, "date" : ISODate("2022-02-17T08:00:00Z") },
+	{ "_id" : 5, "item" : "Americanos", "price" : 10, "size": "Grande","quantity" : 12, "date" : ISODate("2022-02-18T21:06:00Z") },
+	{ "_id" : 6, "item" : "Cappuccino", "price" : 7, "size": "Tall","quantity" : 20, "date" : ISODate("2022-02-20T10:07:00Z") },
+	{ "_id" : 7, "item" : "Lattes", "price" : 25,"size": "Tall", "quantity" : 30, "date" : ISODate("2022-02-21T10:08:00Z") },
+	{ "_id" : 8, "item" : "Americanos", "price" : 10, "size": "Grande","quantity" : 21, "date" : ISODate("2022-02-22T14:09:00Z") },
+	{ "_id" : 9, "item" : "Cappuccino", "price" : 10, "size": "Grande","quantity" : 17, "date" : ISODate("2022-02-23T14:09:00Z") },
+	{ "_id" : 10, "item" : "Americanos", "price" : 8, "size": "Tall","quantity" : 15, "date" : ISODate("2022-02-25T14:09:00Z")}
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 1,
+    '1': 2,
+    '2': 3,
+    '3': 4,
+    '4': 5,
+    '5': 6,
+    '6': 7,
+    '7': 8,
+    '8': 9,
+    '9': 10
+  }
+}
+db.sales.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+db.sales.find()
+{
+  _id: 1,
+  item: 'Americanos',
+  price: 5,
+  size: 'Short',
+  quantity: 22,
+  date: 2022-01-15T08:00:00.000Z
+}
+{
+  _id: 2,
+  item: 'Cappuccino',
+  price: 6,
+  size: 'Short',
+  quantity: 12,
+  date: 2022-01-16T09:00:00.000Z
+}
+{
+  _id: 3,
+  item: 'Lattes',
+  price: 15,
+  size: 'Grande',
+  quantity: 25,
+  date: 2022-01-16T09:05:00.000Z
+}
+{
+  _id: 4,
+  item: 'Mochas',
+  price: 25,
+  size: 'Tall',
+  quantity: 11,
+  date: 2022-02-17T08:00:00.000Z
+}
+{
+  _id: 5,
+  item: 'Americanos',
+  price: 10,
+  size: 'Grande',
+  quantity: 12,
+  date: 2022-02-18T21:06:00.000Z
+}
+{
+  _id: 6,
+  item: 'Cappuccino',
+  price: 7,
+  size: 'Tall',
+  quantity: 20,
+  date: 2022-02-20T10:07:00.000Z
+}
+{
+  _id: 7,
+  item: 'Lattes',
+  price: 25,
+  size: 'Tall',
+  quantity: 30,
+  date: 2022-02-21T10:08:00.000Z
+}
+{
+  _id: 8,
+  item: 'Americanos',
+  price: 10,
+  size: 'Grande',
+  quantity: 21,
+  date: 2022-02-22T14:09:00.000Z
+}
+{
+  _id: 9,
+  item: 'Cappuccino',
+  price: 10,
+  size: 'Grande',
+  quantity: 17,
+  date: 2022-02-23T14:09:00.000Z
+}
+{
+  _id: 10,
+  item: 'Americanos',
+  price: 8,
+  size: 'Tall',
+  quantity: 15,
+  date: 2022-02-25T14:09:00.000Z
+}
+db.sales.createIndex({title:1})
+title_1
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { title: 1 }, name: 'title_1' }
+]
+db.sales.insertMany([
+   { email:  "john@test.com", name: "john"},
+   { email:  "jane@test.com", name: "jane"},
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a241e54601f77b4c51b3aa5'),
+    '1': ObjectId('6a241e54601f77b4c51b3aa6')
+  }
+}
+db.sales.createIndex({email:1},{unique:true});
+MongoServerError[DuplicateKey]: Index build failed: 77b1cb72-4e45-49f5-813e-42ef34ce3494: Collection vit.sales ( dfd9cfcf-4187-4a2c-911a-cf694c33936c ) :: caused by :: E11000 duplicate key error collection: vit.sales index: email_1 dup key: { email: null }
+db.sales.insertOne(
+   { email:  "john@test.com", name: "johny"}
+);
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a241e90601f77b4c51b3aa7')
+}
+db.sales.drop()
+true
+db.sales.insertMany([
+   { email:  "john@test.com", name: "john"},
+   { email:  "jane@test.com", name: "jane"},
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a241f18601f77b4c51b3aa8'),
+    '1': ObjectId('6a241f18601f77b4c51b3aa9')
+  }
+}
+db.users.createIndex({email:1},{unique:true});
+email_1
+db.users.insertOne(
+   { email:  "john@test.com", name: "johny"}
+);
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a241f2c601f77b4c51b3aaa')
+}
+db.sales.createIndex({email:1},{unique:true});
+email_1
+db.sales.insertOne(
+   { email:  "john@test.com", name: "johny"}
+);
+MongoServerError: E11000 duplicate key error collection: vit.sales index: email_1 dup key: { email: "john@test.com" }
+db.sales.drop()
+true
+db.sales.insertMany([
+   { email:  "john@test.com", name: "john"},
+   { email:  "john@test.com", name: "johny"},
+   { email:  "jane@test.com", name: "jane"},
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a241f7c601f77b4c51b3aac'),
+    '1': ObjectId('6a241f7c601f77b4c51b3aad'),
+    '2': ObjectId('6a241f7c601f77b4c51b3aae')
+  }
+}
+db.sales.createIndex({email: 1},{unique:true})
+MongoServerError[DuplicateKey]: Index build failed: 6864017e-4d51-442d-b1ef-715081bdc39d: Collection vit.sales ( 7e75b85a-eaa2-445b-90fb-8ea6731f8d14 ) :: caused by :: E11000 duplicate key error collection: vit.sales index: email_1 dup key: { email: "john@test.com" }
+db.sales.deleteOne({name:'johny', email: 'john@test.com'});
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.sales.createIndex({email: 1},{unique:true})
+email_1
+db.sales.createIndex({ title: 1, year: 1 })
+title_1_year_1
+db.sales.find({title: /valley/gi, year: 2014}).explain('executionStats');
+BSONError: The regular expression option [g] is not supported
+db.movies.find({title: /john/, year: john}).explain('executionStats');
+ReferenceError: john is not defined
+db.movies.find({title: /john/gi, year: john}).explain('executionStats');
+ReferenceError: john is not defined
+db.sales.insertMany([
+   { email:  "john@test.com", name: "john"},
+   { email:  "john@test.com", name: "johny"},
+   { email:  "jane@test.com", name: "jane"},
+])
+MongoBulkWriteError: E11000 duplicate key error collection: vit.sales index: email_1 dup key: { email: "john@test.com" }
+db.sales.drop()
+true
+db.sales.insertMany([
+   { email:  "john@test.com", name: "john"},
+   { email:  "john@test.com", name: "johny"},
+   { email:  "jane@test.com", name: "jane"},
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a24252a601f77b4c51b3ab2'),
+    '1': ObjectId('6a24252a601f77b4c51b3ab3'),
+    '2': ObjectId('6a24252a601f77b4c51b3ab4')
+  }
+}
+db.sales.createIndex({ customerId: 1, createdAt: -1 })
+customerId_1_createdAt_-1
+db.sales.find({ 
+  productName: /shirt/gi, 
+  fiscalYear: 2026 
+}).explain("executionStats");
+BSONError: The regular expression option [g] is not supported
+db.sales.find({ 
+  productName: /shirt/i,   // Removed the 'g'
+  fiscalYear: 2026 
+}).explain("executionStats");
+{
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 0,
+    executionTimeMillis: 0,
+    totalKeysExamined: 0,
+    totalDocsExamined: 3,
+    executionStages: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: {
+        '$and': [
+          {
+            fiscalYear: {
+              '$eq': 2026
+            }
+          },
+          {
+            productName: BSONRegExp('shirt', 'i')
+          }
+        ]
+      },
+      nReturned: 0,
+      executionTimeMillisEstimate: 0,
+      works: 4,
+      advanced: 0,
+      needTime: 3,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      nss: 'vit.sales',
+      direction: 'forward',
+      docsExamined: 3
+    }
+  },
+  queryShapeHash: '8BFDF6E7420ECCF4C2D71FCFE14DF1D7DF0E2B811814D07EBD699C43EF570B33',
+  command: {
+    find: 'sales',
+    filter: {
+      productName: BSONRegExp('shirt', 'i'),
+      fiscalYear: 2026
+    },
+    '$db': 'vit'
+  },
+  serverInfo: {
+    host: 'LAPTOP-UHE3QTMN',
+    port: 27017,
+    version: '8.3.2',
+    gitVersion: '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+db.sales.find({ productName: /shirt/i }).explain('executionStats');
+{
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 0,
+    executionTimeMillis: 0,
+    totalKeysExamined: 0,
+    totalDocsExamined: 3,
+    executionStages: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: {
+        productName: BSONRegExp('shirt', 'i')
+      },
+      nReturned: 0,
+      executionTimeMillisEstimate: 0,
+      works: 4,
+      advanced: 0,
+      needTime: 3,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      nss: 'vit.sales',
+      direction: 'forward',
+      docsExamined: 3
+    }
+  },
+  queryShapeHash: '8ED1AC5C77455D877D3E10CCA294383BD47EB121F17E81F4027EC5670B4BA2FC',
+  command: {
+    find: 'sales',
+    filter: {
+      productName: BSONRegExp('shirt', 'i')
+    },
+    '$db': 'vit'
+  },
+  serverInfo: {
+    host: 'LAPTOP-UHE3QTMN',
+    port: 27017,
+    version: '8.3.2',
+    gitVersion: '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+db.sales.find({ year: 2026 }).explain('executionStats');
+{
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 0,
+    executionTimeMillis: 1,
+    totalKeysExamined: 0,
+    totalDocsExamined: 3,
+    executionStages: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: {
+        year: {
+          '$eq': 2026
+        }
+      },
+      nReturned: 0,
+      executionTimeMillisEstimate: 0,
+      works: 4,
+      advanced: 0,
+      needTime: 3,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      nss: 'vit.sales',
+      direction: 'forward',
+      docsExamined: 3
+    }
+  },
+  queryShapeHash: '99A1D218E79E1723C8DC391663058746EA37DD642A0E788EFAA48D61FF777D2B',
+  command: {
+    find: 'sales',
+    filter: {
+      year: 2026
+    },
+    '$db': 'vit'
+  },
+  serverInfo: {
+    host: 'LAPTOP-UHE3QTMN',
+    port: 27017,
+    version: '8.3.2',
+    gitVersion: '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+db.sales.dropIndex(index)
+ReferenceError: index is not defined
+db.sales.createIndex({ orderYear: 1, totalAmount: -1 })
+orderYear_1_totalAmount_-1
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { customerId: 1, createdAt: -1 },
+    name: 'customerId_1_createdAt_-1'
+  },
+  {
+    v: 2,
+    key: { orderYear: 1, totalAmount: -1 },
+    name: 'orderYear_1_totalAmount_-1'
+  }
+]
+
+db.sales.dropIndex({ orderYear: 1 });
+{ nIndexesWas: 3, ok: 1 }
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { customerId: 1, createdAt: -1 },
+    name: 'customerId_1_createdAt_-1'
+  },
+  {
+    v: 2,
+    key: { orderYear: 1, totalAmount: -1 },
+    name: 'orderYear_1_totalAmount_-1'
+  }
+]
+
+db.sales.dropIndex({ orderYear: 1, totalAmount: -1 });
+{ nIndexesWas: 3, ok: 1 }
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { customerId: 1, createdAt: -1 },
+    name: 'customerId_1_createdAt_-1'
+  }
+]
+db.sales.createIndex({ "items.quantity": -1, status: 1 })
+items.quantity_-1_status_1
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { customerId: 1, createdAt: -1 },
+    name: 'customerId_1_createdAt_-1'
+  },
+  {
+    v: 2,
+    key: { 'items.quantity': -1, status: 1 },
+    name: 'items.quantity_-1_status_1'
+  }
+]
+
+db.sales.dropIndex({items.quantity": -1, status: 1 });
+SyntaxError: Unexpected token, expected "," (2:25)
+
+  1 |
+> 2 | db.sales.dropIndex({items.quantity": -1, status: 1 });
+    |                          ^
+
+db.sales.dropIndex({items.quantity: -1, status: 1 });
+SyntaxError: Unexpected token, expected "," (2:25)
+
+  1 |
+> 2 | db.sales.dropIndex({items.quantity: -1, status: 1 });
+    |                          ^
+
+db.sales.dropIndex({"items.quantity": -1, status: 1 });
+{ nIndexesWas: 3, ok: 1 }
+db.sales.createIndex({year: 1})
+db.sales.createIndex({runtime: 1})
+runtime_1
+db.sales.createIndex({year: 1})
+year_1
+
+db.sales.createIndex({runtime: 1})
+runtime_1
+db.sales.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { customerId: 1, createdAt: -1 },
+    name: 'customerId_1_createdAt_-1'
+  },
+  { v: 2, key: { year: 1 }, name: 'year_1' },
+  { v: 2, key: { runtime: 1 }, name: 'runtime_1' }
+]
+db.sales.dropIndexes()
+{
+  nIndexesWas: 4,
+  msg: 'non-_id indexes dropped for collection',
+  ok: 1
+}
+
+
+
+
