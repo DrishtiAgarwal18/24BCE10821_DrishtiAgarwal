@@ -1,0 +1,45 @@
+1.db.students.find({dept: "CS", marks: { $gt: 80 }})
+
+2.db.students.find({ marks: {$gte: 60,$lte: 85}})
+
+3.db.students.find({dept: { $in: ["IT", "ECE"] }})
+
+4.db.students.find({dept: { $nin: ["CS"] }},{name: 1,dept: 1,_id: 0})
+
+5.db.students.find({
+  "address.city": "Chennai"
+})
+
+6.db.products.aggregate([{$group: { _id: "$category",totalRevenue: { $sum: {$multiply: ["$price", "$sold"]}}} }])
+
+7.db.students.aggregate([
+  {$group: { _id: "$dept",totalStudents: { $sum: 1 }, averageMarks: { $avg: "$marks" }
+    }}])
+
+8.db.students.updateMany({},{$unset: {scholarship: ""}})
+
+9.db.students.updateMany({ dept: "CS" },{$set: {scholarship: false}})
+
+10.db.students.updateOne({ _id: 6 },{$inc: {marks: 10}})
+
+11.db.students.find()
+.sort({ marks: -1 })
+.skip(2)
+.limit(2)
+
+12.db.employees.find({
+  salary: { $gt: 50000 },
+  experience: { $gt: 5 }
+})
+
+13.db.employees.find({$expr: {$gt: [{ $size: "$skills" },2]}})
+
+14.db.employees.aggregate([{$group: {_id: "$department", avgSalary: { $avg: "$salary" }}},{$match: {avgSalary: { $gt: 50000 }}}])
+
+15.db.employees.aggregate([{$group: {_id: "$department",minSalary: { $min: "$salary" }}}])
+
+16.db.employees.updateMany({},{$rename: {"city": "location"}})
+
+17.db.products.find({stock: { $type: "number" }})
+
+18.db.students.updateMany({ active: false },{$set: {active: true}})
