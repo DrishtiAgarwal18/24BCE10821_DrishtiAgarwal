@@ -1,0 +1,1640 @@
+db.employees.insertMany([
+{
+    empId: 101,
+    name: "Arun",
+    age: 25,
+    department: "IT",
+    salary: 45000,
+    city: "Chennai",
+    experience: 3,
+    skills: ["Java","MongoDB","Spring"],
+    active: true
+},
+{
+    empId: 102,
+    name: "Priya",
+    age: 28,
+    department: "HR",
+    salary: 55000,
+    city: "Bangalore",
+    experience: 5,
+    skills: ["Recruitment","Training"],
+    active: true
+},
+{
+    empId: 103,
+    name: "Rahul",
+    age: 32,
+    department: "IT",
+    salary: 75000,
+    city: "Mumbai",
+    experience: 8,
+    skills: ["Python","MongoDB","AWS"],
+    active: true
+},
+{
+    empId: 104,
+    name: "Sneha",
+    age: 26,
+    department: "Finance",
+    salary: 50000,
+    city: "Delhi",
+    experience: 4,
+    skills: ["Excel","Taxation"],
+    active: false
+},
+{
+    empId: 105,
+    name: "Karthik",
+    age: 30,
+    department: "IT",
+    salary: 68000,
+    city: "Chennai",
+    experience: 7,
+    skills: ["NodeJS","MongoDB","React"],
+    active: true
+}
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a329e3ac11e3722983b2cc5'),
+    '1': ObjectId('6a329e3ac11e3722983b2cc6'),
+    '2': ObjectId('6a329e3ac11e3722983b2cc7'),
+    '3': ObjectId('6a329e3ac11e3722983b2cc8'),
+    '4': ObjectId('6a329e3ac11e3722983b2cc9')
+  }
+}
+Q1. db.employees.insertOne(
+  {
+    empId: 106,
+    name: "Swati",
+    age: 32,
+    department: "HR",
+    salary: 50000,
+    city: "Odisha",
+    experience: 4,
+    skills: ["Training"],
+    active: false
+}
+)
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a329e4fc11e3722983b2cca')
+}
+Q2. db.employees.insertMany([
+ {
+    empId: 107,
+    name: "Rahul",
+    age: 28,
+    department: "Finance",
+    salary: 64000,
+    city: "Mumbai",
+    experience: 2,
+    skills: ["Taxation","Budgeting"],
+    active: false
+},
+{
+    empId: 108,
+    name: "Tahir",
+    age: 35,
+    department: "IT",
+    salary: 70000,
+    city: "Bangalore",
+    experience: 7,
+    skills: ["Node.js","MongoDB","Postman"],
+    active: true
+} 
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a329e75c11e3722983b2ccb'),
+    '1': ObjectId('6a329e75c11e3722983b2ccc')
+  }
+}
+Q3. db.employees.find({department : "IT"}).limit(1)
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+Q4.db.employees.find()
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q5. db.employees.find({},{name : 1, salary : 1, _id : 0})
+{
+  name: 'Arun',
+  salary: 45000
+}
+{
+  name: 'Priya',
+  salary: 55000
+}
+{
+  name: 'Rahul',
+  salary: 75000
+}
+{
+  name: 'Sneha',
+  salary: 50000
+}
+{
+  name: 'Karthik',
+  salary: 68000
+}
+{
+  name: 'Swati',
+  salary: 50000
+}
+{
+  name: 'Rahul',
+  salary: 64000
+}
+{
+  name: 'Tahir',
+  salary: 70000
+}
+
+Q6. db.employees.find({
+  salary : {
+    $eq : 50000
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+Q7. db.employees.find({
+  salary : {
+    $lt : 60000
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+Q8. db.employees.find({
+  salary : {
+    $gte : 60000
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q9. db.employees.find({
+  age : {
+    $ne : 30
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q10. db.employees.find({
+  $or : [{
+    city : "Chennai"
+  },{
+    city : "Mumbai"
+  }]
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+Q11. db.employees.find({
+  city : {
+    $ne : "Chennai"
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q12. db.employees.find({
+  salary : {
+    $gt : 50000
+  },department : {
+    $eq : "IT"
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q13. db.employees.find({
+  $or : [{
+    city : "Chennai"
+  },{
+    city : "Bangalore"
+  }]
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q14. db.employees.find({
+  salary : {
+    $not : {
+      $gte : 60000
+    }
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+Q15. db.employees.find({
+  department : {
+    $nin : ['IT','HR']
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+Q16. db.employees.find({
+  experience : {
+    $exists : true
+  } 
+    })
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q17. db.employees.find({
+  salary : {
+    $type : ["int"]
+  }
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q18. db.employees.find({ skills: "MongoDB" })
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q19. db.employees.find({
+  $and: [
+    { skills: "MongoDB" },
+    { skills: "AWS" }
+  ]
+})
+
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+Q20. db.employees.find({ 
+  skills: { 
+    $size: 3
+  } 
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+Q21. db.employees.find({ 
+  skills: { 
+    $elemMatch: { 
+      $eq: "Java" 
+    } 
+  } 
+})
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+Q22. db.employees.find({}).sort({salary : -1 })
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccb'),
+  empId: 107,
+  name: 'Rahul',
+  age: 28,
+  department: 'Finance',
+  salary: 64000,
+  city: 'Mumbai',
+  experience: 2,
+  skills: [
+    'Taxation',
+    'Budgeting'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc6'),
+  empId: 102,
+  name: 'Priya',
+  age: 28,
+  department: 'HR',
+  salary: 55000,
+  city: 'Bangalore',
+  experience: 5,
+  skills: [
+    'Recruitment',
+    'Training'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc8'),
+  empId: 104,
+  name: 'Sneha',
+  age: 26,
+  department: 'Finance',
+  salary: 50000,
+  city: 'Delhi',
+  experience: 4,
+  skills: [
+    'Excel',
+    'Taxation'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e4fc11e3722983b2cca'),
+  empId: 106,
+  name: 'Swati',
+  age: 32,
+  department: 'HR',
+  salary: 50000,
+  city: 'Odisha',
+  experience: 4,
+  skills: [
+    'Training'
+  ],
+  active: false
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc5'),
+  empId: 101,
+  name: 'Arun',
+  age: 25,
+  department: 'IT',
+  salary: 45000,
+  city: 'Chennai',
+  experience: 3,
+  skills: [
+    'Java',
+    'MongoDB',
+    'Spring'
+  ],
+  active: true
+}
+Q23.db.employees.find({}).sort({salary : -1 }).limit(3)
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc7'),
+  empId: 103,
+  name: 'Rahul',
+  age: 32,
+  department: 'IT',
+  salary: 75000,
+  city: 'Mumbai',
+  experience: 8,
+  skills: [
+    'Python',
+    'MongoDB',
+    'AWS'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e75c11e3722983b2ccc'),
+  empId: 108,
+  name: 'Tahir',
+  age: 35,
+  department: 'IT',
+  salary: 70000,
+  city: 'Bangalore',
+  experience: 7,
+  skills: [
+    'Node.js',
+    'MongoDB',
+    'Postman'
+  ],
+  active: true
+}
+{
+  _id: ObjectId('6a329e3ac11e3722983b2cc9'),
+  empId: 105,
+  name: 'Karthik',
+  age: 30,
+  department: 'IT',
+  salary: 68000,
+  city: 'Chennai',
+  experience: 7,
+  skills: [
+    'NodeJS',
+    'MongoDB',
+    'React'
+  ],
+  active: true
+}
+Q24. db.employees.updateOne({ 
+  empId: 101 
+},{ 
+  $inc: { 
+    salary: 5000 
+  } 
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Q25. db.employees.updateMany({ 
+  department: "IT" 
+},{ 
+  $mul: { 
+    salary: 1.1 
+  } 
+})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
